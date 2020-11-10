@@ -2,6 +2,7 @@ import argparse
 import os
 import torch
 import torch.nn as nn
+import sys
 import os.path
 from PIL import Image
 import random
@@ -298,7 +299,7 @@ class BackBone(nn.Module):
                         ])
             setattr(self, 'augment_transforms', transform_list)
         else:
-            raise ValueError("Pretrained dataset %s not recognized." % pretrained_dataset)
+            raise ValueError("Pretrained dataset %s not recognized." % self._opt.pretrained_dataset)
         setattr(feature_extractor, 'name', model_name)
         # reform the final layer of feature extrator, turn it into a Identity module
         last_layer_name, last_module = list(feature_extractor.named_modules())[-1]
